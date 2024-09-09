@@ -1,3 +1,52 @@
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+.calculator {
+  background-color: #e0e0e0;
+  border: 2px solid #999;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+}
+.display {
+  background-color: #d8d3ee;
+  border: 1px solid #999;
+  border-radius: 5px;
+  height: 60px;
+  margin-bottom: 20px;
+  padding: 10px;
+  text-align: right;
+  font-size: 24px;
+}
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+button {
+  background-color: #f0f0f0;
+  border: 1px solid #999;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 15px;
+  cursor: pointer;
+  flex: 1 0 21%; /* This allows 4 buttons per row with gap */
+}
+button:hover {
+  background-color: #e0e0e0;
+}
+.operator {
+  background-color: #ffd699;
+}
+.operator:hover {
+  background-color: #ffc966;
 }
