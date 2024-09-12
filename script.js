@@ -1,22 +1,22 @@
-console.log("Hello World");
-
+let operatorPressed = false;
 let previousNum = null;
 let currentNum = null;
 let currentOperator = "kundi";
-
+let numberOnDisplay = "";
 const buttons = document.querySelector(".buttons");
 const display = document.querySelector(".display");
-display.textContent = "0";
+
+const clear = () => (display.textContent = "");
 
 buttons.addEventListener("click", (event) => {
   // Checks if Numbers are pressed
   if (event.target.className == "number") {
-    updateNumber(event.target.textContent);
-    console.log(event.target.textContent);
-    display.textContent = event.target.textContent;
+    handleNumberClicked(event.target);
   }
   // Checks if Operators are pressed
   if (event.target.className == "operator") {
+    operatorPressed = true;
+    calculate();
     currentOperator = event.target.textContent;
     console.log(event.target.textContent);
     display.textContent = previousNum;
@@ -29,32 +29,41 @@ buttons.addEventListener("click", (event) => {
   console.log(event.target.className);
 });
 
-function updateNumber(pressedNumber) {
-  // Check if it is the First Time
-  if (previousNum === null && currentNum === null)
-    previousNum = parseFloat(pressedNumber);
-  // Other than First time
-  else {
-    currentNum = parseFloat(pressedNumber);
-    calculate();
-  }
+function handleNumberClicked(numButtons) {
+  if (operatorPressed) {
+    clear();
+    operatorPressed = false;
+    display.textContent += numButtons.textContent;
+  } else display.textContent += numButtons.textContent;
+
+  console.log(numButtons.textContent);
 }
 
 function calculate() {
-  if (currentOperator === "+") previousNum = previousNum + currentNum;
-  else if (currentOperator === "-") previousNum = previousNum - currentNum;
-  else if (currentOperator === "*") previousNum = previousNum * currentNum;
-  else if (currentOperator === "/") previousNum = previousNum / currentNum;
-  else if (currentOperator === "%") previousNum = previousNum % currentNum;
+  numberOnDisplay = parseFloat(display.textContent);
 
-  console.log(previousNum);
+  //  Check if it is the First Time
+  if (previousNum === null && currentNum === null)
+    previousNum = parseFloat(numberOnDisplay);
+  //  Other than First time
+  else {
+    currentNum = parseFloat(numberOnDisplay);
+
+    if (currentOperator === "+") previousNum = previousNum + currentNum;
+    else if (currentOperator === "-") previousNum = previousNum - currentNum;
+    else if (currentOperator === "*") previousNum = previousNum * currentNum;
+    else if (currentOperator === "/") previousNum = previousNum / currentNum;
+    else if (currentOperator === "%") previousNum = previousNum % currentNum;
+
+    console.log(previousNum);
+  }
 }
 
 function handleOtherButtons(thatButton) {
   if (thatButton === "AC") {
     previousNum = null;
     currentNum = null;
-    display.textContent = "0";
+    display.textContent = "";
   }
 
   // other COde I will write Later;
